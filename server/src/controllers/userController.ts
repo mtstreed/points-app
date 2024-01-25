@@ -1,11 +1,17 @@
 import {Request, Response} from 'express';
+import User, { IUser } from '../models/userModel.js';
 
-const getAllUsers = (req: Request, res: Response) => {
-    res.send('getAllUsers called.');
-}
+const getAllUsers = async (req: Request, res: Response) => {
+    try {
+        const users: IUser[] = await User.find();
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
 
 const getUserById = (req: Request, res: Response) => {
-    res.send('getUserById called.');
+    res.send('getUserById called');
 }
 
 export default {
