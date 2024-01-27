@@ -26,11 +26,11 @@ mongoose.connect(mongoUri, {dbName: 'testDb'})
 
 // **************************** TODO delete. This was just to test that I could link to a specific database within my cluster,
 // and also create documents from the code. It worked. If I leave this here it will create a new user every time server starts.
-import User, {IUser} from './models/userModel.js';
-async function createOneUser() {
-  const user: IUser = await User.create({name: 'testUserFromCode2', age: 33}); 
-}
-createOneUser()
+// import User, {IUser} from './models/userModel.js';
+// async function createOneUser() {
+//   const user: IUser = await User.create({name: 'testUserFromCode2', age: 33}); 
+// }
+// createOneUser()
 // ****************************
 
 app.use('/users', userRoutes);
