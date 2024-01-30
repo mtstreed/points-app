@@ -3,14 +3,28 @@ import IPlayer from '../types/IPlayer';
 
 export async function fetchAllPlayers(): Promise<IPlayer[]> {
     let allPlayers: IPlayer[] = [];
-    const response = await fetch('http://localhost:3000/api/users', {
+    const res: Response = await fetch('http://localhost:3000/api/users', {
+        method: 'GET',
         headers: {
+            'Content-Type': 'application/json',
             'Cache-Control': 'no-cache',
         },
     });
-    const jsonObj = await response.json() as { data: IPlayer[]};
-    allPlayers = jsonObj.data;
+    allPlayers = await res.json() as IPlayer[];
     return allPlayers;
+}
+
+
+export async function updatePlayers(playerList: IPlayer[]): Promise<IPlayer[]> {
+    const res: Response = await fetch('http://localhost:3000/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(JSON.stringify(playerList)),
+    });
+    console.log('playerUtils|updatePlayers|JSON.stringify(playerList): ' + JSON.stringify(playerList));
+    return playerList;
 }
 
 
@@ -31,4 +45,3 @@ export function assignPlayerRanks(playerList: IPlayer[]): IPlayer[] {
     });
     return playerList;
 }
-
