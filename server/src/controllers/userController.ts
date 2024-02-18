@@ -19,7 +19,6 @@ export async function getUserById(req: Request, res: Response): Promise<void> {
 
 export async function updateUsers(req: Request, res: Response): Promise<void> {
     try {
-        console.log('userController|updateUsers| START');
         const reqBody = req.body;
         const updatedUsers: IUser[] = reqBody as IUser[];
 
@@ -33,7 +32,7 @@ export async function updateUsers(req: Request, res: Response): Promise<void> {
                 return;
             }
         });
-        
+
         await Promise.all(mapPromises);
         res.json(updatedUsers);
     } catch (error) {
