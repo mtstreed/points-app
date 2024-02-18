@@ -27,7 +27,6 @@ export default function Scoreboard() {
             updatedPlayers = updatedPlayers.map((player) => player._id === clickedPlayer._id ? {...player, points: player.points + 1} : player);
             updatedPlayers = assignPlayerRanks(updatedPlayers);
             setPlayers(updatedPlayers);
-            console.log('Scoreboard|handleAddPoints|JSON.stringify(updatedPlayers): ' + JSON.stringify(updatedPlayers));
             updatePlayers(updatedPlayers);
         }
     }

@@ -3,27 +3,37 @@ import IPlayer from '../types/IPlayer';
 
 export async function fetchAllPlayers(): Promise<IPlayer[]> {
     let allPlayers: IPlayer[] = [];
-    const res: Response = await fetch('http://localhost:3000/api/users', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cache-Control': 'no-cache',
-        },
-    });
-    allPlayers = await res.json() as IPlayer[];
+
+    try {
+        const res: Response = await fetch('http://localhost:3000/api/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+            },
+        });
+        allPlayers = await res.json() as IPlayer[];
+    } catch (e) {
+        console.log('playerUtils|fetchAllPlayers| error: ' + e);
+    }
     return allPlayers;
 }
 
 
 export async function updatePlayers(playerList: IPlayer[]): Promise<IPlayer[]> {
-    const res: Response = await fetch('http://localhost:3000/api/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(JSON.stringify(playerList)),
-    });
-    console.log('playerUtils|updatePlayers|JSON.stringify(playerList): ' + JSON.stringify(playerList));
+    try {
+        const res: Response = await fetch('http://localhost:3000/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(playerList),
+        });
+        const data = await res.json();
+    } catch (e) {
+        console.log('playerUtils|updatePlayers| error: ' + e);
+    }
+
     return playerList;
 }
 

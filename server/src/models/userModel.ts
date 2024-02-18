@@ -12,7 +12,5 @@ const userSchema: Schema = new Schema({
     points: { type: Number, required: true },
     rank: { type: Number, required: true },
 });
+export const User = mongoose.model<IUser>('User', userSchema);
 
-const User = mongoose.model<IUser>('User', userSchema);
-
-export default User;
